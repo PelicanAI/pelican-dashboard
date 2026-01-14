@@ -320,4 +320,4 @@ Volume is the ultimate confirmation of price moves. Big tech and AI names domina
   },
 ];
 
-export const PROMPT_ROTATION_INTERVAL = 60000; // 60 seconds for demo (15 min = 900000 for production)
+export const PROMPT_ROTATION_INTERVAL = 1800000; // 30 minutes
