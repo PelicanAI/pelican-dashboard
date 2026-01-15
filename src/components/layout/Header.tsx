@@ -1,20 +1,40 @@
+import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 
 export function Header() {
-  return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--bg-primary)]/80 border-b border-[var(--border-default)]">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <img src="/logo.svg" alt="Pelican" className="h-8 w-auto" />
-          <span className="font-display text-2xl tracking-wide text-[var(--text-primary)]">
-            PELICAN
-          </span>
-        </div>
+  const location = useLocation();
 
-        {/* Theme toggle */}
-        <ThemeToggle />
+  const isActive = (path: string) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
+
+  return (
+    <nav>
+      <div className="nav-inner">
+        <Link to="/" className="nav-logo">
+          <img src="/logo.svg" alt="Pelican" />
+          <span>Pelican</span>
+        </Link>
+        <div className="nav-links">
+          <Link to="/features" className={isActive('/features') ? 'active' : ''}>
+            Features
+          </Link>
+          <Link to="/pricing" className={isActive('/pricing') ? 'active' : ''}>
+            Pricing
+          </Link>
+          <Link to="/team" className={isActive('/team') ? 'active' : ''}>
+            Team
+          </Link>
+          <Link to="/faq" className={isActive('/faq') ? 'active' : ''}>
+            FAQ
+          </Link>
+          <ThemeToggle />
+          <Link to="/chat" className="btn-primary">
+            Launch App →
+          </Link>
+        </div>
       </div>
-    </header>
+    </nav>
   );
 }
