@@ -17,6 +17,9 @@ export function Header() {
           <span>Pelican</span>
         </Link>
         <div className="nav-links">
+          <Link to="/dashboard" className={isActive('/dashboard') ? 'active' : ''}>
+            Dashboard
+          </Link>
           <Link to="/features" className={isActive('/features') ? 'active' : ''}>
             Features
           </Link>

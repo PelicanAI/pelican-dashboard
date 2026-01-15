@@ -1220,6 +1220,19 @@ table th {
   margin-bottom: 1.5rem;
 }
 
+/* Dashboard CTA Section */
+.dashboard-cta-section {
+  background: linear-gradient(to bottom, transparent 0%, var(--bg-secondary) 50%, transparent 100%);
+}
+
+.dashboard-cta {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+}
+
 .cta-section p {
   color: var(--text-secondary);
   font-size: 1.25rem;
