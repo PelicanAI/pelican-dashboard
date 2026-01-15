@@ -1,61 +1,57 @@
 import { memo } from 'react';
-import { cn } from '../../utils/cn';
-import { formatCurrency, formatPercent, formatVolume } from '../../utils/formatters';
-import type { StockRowProps } from '../../types';
 
-export const StockRow = memo(function StockRow({
-  ticker,
-  name,
-  price,
-  change,
+interface StockRowProps {
+  rank?: number;
+  ticker: string;
+  price: number;
+  change: number;
+  volume?: string;
+  extraValue?: string; // For things like "2.2x" volume ratio
+  extraLabel?: string;
+}
+
+export const StockRow = memo(function StockRow({ 
+  rank, 
+  ticker, 
+  price, 
+  change, 
   volume,
-  additionalMetric,
-  rank,
+  extraValue,
 }: StockRowProps) {
   const isPositive = change >= 0;
-
+  
   return (
-    <div className="stock-row">
+    <tr className="hover:bg-[var(--bg-tertiary)] transition-colors">
+      {/* Rank */}
       {rank !== undefined && (
-        <span className="w-5 text-xs text-[var(--text-muted)] font-mono text-right">
+        <td className="py-2.5 px-2 text-xs text-[var(--text-muted)] font-mono tabular-nums">
           {rank}
-        </span>
+        </td>
       )}
-
-      <div className="min-w-[52px]">
-        <span className="stock-ticker">{ticker}</span>
-      </div>
-
-      {name && (
-        <span className="flex-1 text-sm text-[var(--text-secondary)] truncate hidden sm:block">
-          {name}
-        </span>
+      
+      {/* Ticker */}
+      <td className="py-2.5 px-2 font-mono font-semibold text-sm text-[var(--text-primary)]">
+        {ticker}
+      </td>
+      
+      {/* Price */}
+      <td className="py-2.5 px-2 text-right font-mono text-sm text-[var(--text-secondary)] tabular-nums">
+        ${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+      </td>
+      
+      {/* Change */}
+      <td className={`py-2.5 px-2 text-right font-mono text-sm font-medium tabular-nums ${
+        isPositive ? 'text-[var(--color-positive)]' : 'text-[var(--color-negative)]'
+      }`}>
+        {isPositive ? '+' : ''}{change.toFixed(2)}%
+      </td>
+      
+      {/* Volume or Extra Value */}
+      {(volume || extraValue) && (
+        <td className="py-2.5 px-2 text-right font-mono text-xs text-[var(--text-muted)] tabular-nums">
+          {extraValue || volume}
+        </td>
       )}
-
-      <span className="stock-price w-20 text-right">
-        {formatCurrency(price)}
-      </span>
-
-      <span
-        className={cn(
-          'font-mono text-sm w-16 text-right font-medium',
-          isPositive ? 'stock-change-positive' : 'stock-change-negative'
-        )}
-      >
-        {formatPercent(change)}
-      </span>
-
-      {volume !== undefined && (
-        <span className="stock-volume w-14 text-right hidden md:block">
-          {formatVolume(volume)}
-        </span>
-      )}
-
-      {additionalMetric && (
-        <span className="text-sm text-[var(--text-secondary)] font-mono w-16 text-right">
-          {additionalMetric.value}
-        </span>
-      )}
-    </div>
+    </tr>
   );
 });

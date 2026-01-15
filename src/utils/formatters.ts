@@ -78,19 +78,3 @@ export function formatDuration(startDate: Date, endDate: Date): string {
   return hours > 0 ? `${days}d ${hours}h` : `${days}d`;
 }
 
-export function calculateProgress(
-  entry: number,
-  target: number,
-  current: number,
-  direction: 'Long' | 'Short'
-): number {
-  if (direction === 'Long') {
-    const totalMove = target - entry;
-    const currentMove = current - entry;
-    return Math.min(100, Math.max(-50, (currentMove / totalMove) * 100));
-  } else {
-    const totalMove = entry - target;
-    const currentMove = entry - current;
-    return Math.min(100, Math.max(-50, (currentMove / totalMove) * 100));
-  }
-}

@@ -1,0 +1,46 @@
+import { IntelligenceCard } from '../IntelligenceCard';
+import { ColumnHeaders } from '../ColumnHeaders';
+import { mockNearHOD } from '../../../data/mockStocks';
+
+export function NearHOD() {
+  const stocks = mockNearHOD;
+
+  return (
+    <IntelligenceCard
+      emoji="🔼"
+      label="Near High of Day"
+      badge={{ text: "STRENGTH", variant: "live" }}
+      isEmpty={stocks.length === 0}
+    >
+      <ColumnHeaders columns={[
+        { label: '' },
+        { label: 'Ticker' },
+        { label: 'Price', align: 'right' },
+        { label: 'Chg', align: 'right' },
+        { label: 'From HOD', align: 'right' },
+      ]} />
+      <tbody>
+        {stocks.map((stock, i) => (
+          <tr key={stock.ticker} className="hover:bg-[var(--bg-tertiary)] transition-colors">
+            <td className="py-2.5 px-2 text-xs text-[var(--text-muted)] font-mono tabular-nums">
+              {i + 1}
+            </td>
+            <td className="py-2.5 px-2 font-mono font-semibold text-sm text-[var(--text-primary)]">
+              {stock.ticker}
+            </td>
+            <td className="py-2.5 px-2 text-right font-mono text-sm text-[var(--text-secondary)] tabular-nums">
+              ${stock.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </td>
+            <td className="py-2.5 px-2 text-right font-mono text-sm font-medium tabular-nums text-[var(--color-positive)]">
+              +{stock.change.toFixed(2)}%
+            </td>
+            <td className="py-2.5 px-2 text-right text-xs text-[var(--text-muted)] font-mono tabular-nums">
+              -{stock.distanceFromHOD.toFixed(2)}%
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </IntelligenceCard>
+  );
+}
+

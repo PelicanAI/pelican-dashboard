@@ -234,3 +234,105 @@ export function getNearLOD(stocks: Stock[], threshold: number = 1, limit: number
     .sort((a, b) => a.change - b.change)
     .slice(0, limit);
 }
+
+// === NEW INTELLIGENCE WIDGET DATA ===
+
+// 1. Momentum Holding Gains
+export const mockMomentumHolding = [
+  { ticker: 'NVDA', price: 892.50, change: 8.4, volume: 45200000 },
+  { ticker: 'AMD', price: 134.60, change: 7.8, volume: 28400000 },
+  { ticker: 'PLTR', price: 26.80, change: 6.5, volume: 12800000 },
+  { ticker: 'CRWD', price: 298.60, change: 5.9, volume: 8400000 },
+  { ticker: 'AVGO', price: 932.40, change: 5.2, volume: 6200000 },
+];
+
+// 2. Forced Selling / Stress
+export const mockForcedSelling = [
+  { ticker: 'MRNA', price: 89.20, change: -7.2, volume: 14500000, volumeRatio: '1.9x' },
+  { ticker: 'COIN', price: 168.30, change: -8.4, volume: 22400000, volumeRatio: '2.1x' },
+  { ticker: 'SMCI', price: 38.30, change: -9.8, volume: 18200000, volumeRatio: '2.4x' },
+  { ticker: 'ROKU', price: 62.40, change: -7.5, volume: 9800000, volumeRatio: '1.8x' },
+];
+
+// 3. Gap & Hold
+export const mockGapAndHold = [
+  { ticker: 'MSTR', price: 1420.50, gapPct: 5.2, currentVsOpen: '+2.1%' },
+  { ticker: 'SOFI', price: 9.45, gapPct: 4.8, currentVsOpen: '+1.8%' },
+  { ticker: 'IONQ', price: 13.40, gapPct: 6.2, currentVsOpen: '+2.5%' },
+  { ticker: 'UPST', price: 45.30, gapPct: 4.5, currentVsOpen: '+1.2%' },
+];
+
+// 4. Gap & Fade
+export const mockGapAndFade = [
+  { ticker: 'ZS', price: 192.30, gapPct: -4.2, currentVsOpen: '-1.8%' },
+  { ticker: 'SNOW', price: 165.40, gapPct: -3.8, currentVsOpen: '-2.1%' },
+  { ticker: 'LYFT', price: 13.80, gapPct: -5.2, currentVsOpen: '-1.5%' },
+];
+
+// 5. Near High of Day
+export const mockNearHOD = [
+  { ticker: 'SHOP', price: 82.30, change: 4.9, distanceFromHOD: 0.8, volume: 8400000 },
+  { ticker: 'SQ', price: 75.40, change: 5.1, distanceFromHOD: 1.2, volume: 12200000 },
+  { ticker: 'RBLX', price: 44.80, change: 6.5, distanceFromHOD: 1.5, volume: 14800000 },
+  { ticker: 'NET', price: 82.90, change: 4.6, distanceFromHOD: 0.9, volume: 6200000 },
+  { ticker: 'DDOG', price: 132.40, change: 3.1, distanceFromHOD: 1.8, volume: 4500000 },
+];
+
+// 6. Near Low of Day
+export const mockNearLOD = [
+  { ticker: 'NKLA', price: 0.78, change: -14.8, distanceFromLOD: 1.2, volume: 8200000 },
+  { ticker: 'PLUG', price: 3.12, change: -8.9, distanceFromLOD: 0.9, volume: 22400000 },
+  { ticker: 'FCEL', price: 1.38, change: -9.8, distanceFromLOD: 1.5, volume: 12800000 },
+  { ticker: 'BLNK', price: 2.72, change: -7.2, distanceFromLOD: 1.8, volume: 6400000 },
+];
+
+// 7. Wide Range Day
+export const mockWideRange = [
+  { ticker: 'MARA', price: 19.40, change: 2.4, rangePct: 12.8, high: 21.20, low: 18.50, volume: 28400000 },
+  { ticker: 'RIOT', price: 13.80, change: -3.2, rangePct: 11.2, high: 15.20, low: 13.50, volume: 18200000 },
+  { ticker: 'SOUN', price: 5.25, change: 15.4, rangePct: 18.4, high: 5.45, low: 4.45, volume: 42800000 },
+  { ticker: 'BBAI', price: 2.68, change: 8.9, rangePct: 14.2, high: 2.85, low: 2.45, volume: 12400000 },
+  { ticker: 'QUBT', price: 3.72, change: 22.4, rangePct: 24.8, high: 3.85, low: 2.95, volume: 38200000 },
+];
+
+// 8. Quiet Institutional
+export const mockQuietInstitutional = [
+  { ticker: 'AAPL', price: 178.50, change: 0.3, volume: 82400000, volumeRatio: '2.2x' },
+  { ticker: 'MSFT', price: 378.90, change: -0.5, volume: 42800000, volumeRatio: '2.4x' },
+  { ticker: 'GOOGL', price: 141.20, change: 0.8, volume: 38200000, volumeRatio: '2.1x' },
+  { ticker: 'JPM', price: 195.60, change: -0.2, volume: 18400000, volumeRatio: '2.8x' },
+  { ticker: 'V', price: 275.40, change: 0.6, volume: 12200000, volumeRatio: '2.5x' },
+];
+
+// 9. Crypto Momentum
+export const mockCryptoMomentum = [
+  { symbol: 'BTC', price: 67420.50, change: 12.4, volume: 2400000000 },
+  { symbol: 'ETH', price: 3520.80, change: 10.8, volume: 1200000000 },
+  { symbol: 'SOL', price: 142.60, change: 18.2, volume: 480000000 },
+  { symbol: 'AVAX', price: 38.40, change: 14.5, volume: 280000000 },
+  { symbol: 'LINK', price: 22.80, change: 11.2, volume: 320000000 },
+];
+
+// 10. Crypto Stress
+export const mockCryptoStress = [
+  { symbol: 'DOGE', price: 0.082, change: -12.8, volume: 840000000 },
+  { symbol: 'SHIB', price: 0.000024, change: -15.4, volume: 520000000 },
+  { symbol: 'ADA', price: 0.58, change: -10.2, volume: 380000000 },
+];
+
+// 11. FX Compression
+export const mockFXCompression = [
+  { pair: 'EUR/USD', price: 1.0842, change: 0.12 },
+  { pair: 'GBP/USD', price: 1.2654, change: -0.08 },
+  { pair: 'AUD/USD', price: 0.6628, change: 0.24 },
+  { pair: 'NZD/USD', price: 0.6142, change: -0.18 },
+  { pair: 'USD/CAD', price: 1.3485, change: 0.32 },
+];
+
+// 12. USD Strength
+export const mockUSDStrength = [
+  { pair: 'USD/JPY', price: 148.42, change: 0.85 },
+  { pair: 'USD/CHF', price: 0.8628, change: 0.72 },
+  { pair: 'USD/MXN', price: 17.24, change: 0.94 },
+  { pair: 'DXY', price: 103.85, change: 0.78 },
+];
